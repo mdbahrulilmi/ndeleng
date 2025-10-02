@@ -21,7 +21,7 @@ export default function Search() {
       <Input
         name="q"
         placeholder="Search movies..."
-        className="w-full bg-white md:w-40 md:bg-white/5 border-white/10 text-white placeholder:text-gray-500"
+        className="w-full bg-white md:w-40 md:bg-white/5 border-white/10 text-black md:text-white placeholder:text-gray-500"
       />
       <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
         Search
