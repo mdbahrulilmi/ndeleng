@@ -52,11 +52,11 @@ export function Navbar() {
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}
+              <SessionProvider>
+                  <GoogleButton />
+              </SessionProvider>
               </NavigationMenuList>
             </NavigationMenu>
-
-          {/* Search */}
-            
           </div>
 
 
