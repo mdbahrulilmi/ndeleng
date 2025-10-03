@@ -4,8 +4,14 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const path = searchParams.get('path');
 
-  if (!path) {
+  const allowedPaths = ["/search/movie", "/search/tv"];
+
+  if (!path){
     return NextResponse.json({ error: 'Path is required' }, { status: 400 });
+  }
+
+  if (!allowedPaths.some((p) => path!.startsWith(p))) {
+  return NextResponse.json({ error: "Not allowed" }, { status: 403 });
   }
 
   const url = "https://api.themoviedb.org/3";
