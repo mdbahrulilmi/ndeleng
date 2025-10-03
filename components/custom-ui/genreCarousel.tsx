@@ -1,4 +1,4 @@
-import { fetchMoviesByGenre } from "./tmbd/fetchMoviesByGenre";
+import { fetchMoviesByGenre } from "../../lib/tmbd/fetchMoviesByGenre";
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +14,7 @@ export default async function GenreCarousel({ genre, category }: { genre: { id: 
   const title = (category === "movie") ? "Movies" : "Tv Series"
 
   return (
-    <div className="mt-5 md:mt-16">
+    <div className="mt-16">
       <h2 className="text-2xl font-bold text-white mb-2 md:mb-6">
        {data.genre.name} {title}
       </h2>

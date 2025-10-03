@@ -42,7 +42,7 @@ export default function Search() {
     <div>
       {/* Content */}
       <div className="relative container mx-auto px-4 pt-3 md:px-20 md:pt-10 pb-20 h-screen">
-        <div className="mt-16">
+        <div className="mt-30">
           <h2 className="text-3xl font-bold text-white mb-6">
             {query ? `List of ${query}` : 'Search for movies'}
           </h2>

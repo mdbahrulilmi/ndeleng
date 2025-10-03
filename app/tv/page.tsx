@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import GenreCarousel from "../../lib/genreCarousel";
+import GenreCarousel from "../../components/custom-ui/genreCarousel";
 
 const category = "tv";
 const genres = [
