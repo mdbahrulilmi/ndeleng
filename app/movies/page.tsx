@@ -27,7 +27,7 @@ const genres = [
 export default function Movies() {
   return (
     <div>
-      <div className="relative container mx-auto px-4 md:px-20 pt-15 pb-20 h-screen">
+      <div className="relative container mx-auto px-4 md:px-20 max-h-screen">
         {genres.map((genre) => (
           <Suspense key={genre.id}>
             <GenreCarousel genre={genre} category={category} />

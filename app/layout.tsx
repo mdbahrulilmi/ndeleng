@@ -29,9 +29,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar/>
-        <div className="relative min-h-screen overflow-y-auto overflow-x-hidden bg-slate-950"> 
+        <div className="relative h-screen overflow-y-auto scroll-hidden overflow-x-hidden bg-slate-950"> 
         <Design/>
-        {children}
+        <div className="pt-15">
+          {children}
+        </div>
         </div>
       </body>
     </html>

@@ -11,7 +11,7 @@ import {
 import Search from "./search"
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi"
 import { SessionProvider } from "next-auth/react"
-import GoogleButton from "@/app/login/google-btn"
+import LoginButton from "@/app/login/button"
 
 const navigations = [
     ['/','Home'],
@@ -53,7 +53,7 @@ export function Navbar() {
                   </NavigationMenuItem>
                 ))}
               <SessionProvider>
-                  <GoogleButton />
+                  <LoginButton />
               </SessionProvider>
               </NavigationMenuList>
             </NavigationMenu>
@@ -96,7 +96,7 @@ export function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
               <SessionProvider>
-                <GoogleButton />
+                <LoginButton />
             </SessionProvider>
         </div>
       )}

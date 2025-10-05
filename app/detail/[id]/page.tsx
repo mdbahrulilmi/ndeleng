@@ -5,7 +5,7 @@ export default async function DetailPage({params}: {params: Promise<{ id: string
   const data = await fetchMoviesById(id);
 
   return (
-    <div className="relative z-10 min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+    <div className="relative z-10 min-h-screen py-5 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Backdrop Header */}
         <div className="relative rounded-3xl overflow-hidden mb-8 shadow-2xl">
