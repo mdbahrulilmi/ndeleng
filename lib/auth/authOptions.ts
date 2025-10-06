@@ -13,7 +13,7 @@ import { connectDB } from "../connect"
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!
     })
     ],
-    session: { strategy: "jwt" },
+    session: { strategy: "jwt" as const},
     secret: process.env.NEXTAUTH_SECRET!,
     callbacks: {
        async jwt({ token, user }:{token:any,user:any}) {
