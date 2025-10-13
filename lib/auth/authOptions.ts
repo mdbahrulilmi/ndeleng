@@ -1,9 +1,9 @@
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import GoogleProvider from "next-auth/providers/google"
-import client from "../client"
+import client from "../mongodb/client"
 import usernameGenerator from "../generator/usernameGenerator"
 import { Profile } from "@/models/Profile"
-import { connectDB } from "../connect"
+import { connectDB } from "../mongodb/connect"
 
   export const authOptions = {
     adapter:  MongoDBAdapter(client),

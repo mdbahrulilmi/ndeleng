@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/connect"
+import { connectDB } from "@/lib/mongodb/connect"
 import { Profile } from "@/models/Profile"
 
 export async function GET(req: Request, context:any,) {

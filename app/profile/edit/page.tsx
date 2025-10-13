@@ -1,15 +1,15 @@
 'use client'
 
 import { SessionProvider } from 'next-auth/react'
-import ProfileLayout from './profile-layout'
 import SessionProfile from '@/lib/session/session-profile'
+import EditProfileLayout from './edit-layout'
 
 export default function ProfilePage() {
   const { userData, joinDate, loading } = SessionProfile()
 
   return (
     <SessionProvider>
-      <ProfileLayout userData={userData} joinDate={joinDate} />
+        <EditProfileLayout userData={userData}/>
     </SessionProvider>
   )
 }

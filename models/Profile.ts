@@ -7,7 +7,7 @@ const profileSchema = new Schema({
     username: { type: String, required: true, unique: true},
     bio:{type: String},
     age:{type: Number},
-    avatar: { type: String, default: "/default-avatar.png" },
+    image: { type: String, default: "" },
     gender: { type: String, enum: ["male", "female", "other"], default: "other" },
     location: { type: String },
     favoriteGenres: [{ type: String }],

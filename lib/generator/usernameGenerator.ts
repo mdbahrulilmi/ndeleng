@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import client from "../client";
+import client from "../mongodb/client";
 
 export default async function usernameGenerator(name: string) {
 
