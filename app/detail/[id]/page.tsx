@@ -1,4 +1,4 @@
-import { fetchMoviesById } from "@/lib/tmbd/fetchMoviesById";
+import { fetchMoviesById } from "@/lib/tmdb/fetchMoviesById";
 
 export default async function DetailPage({params}: {params: Promise<{ id: string }>}) {
   const { id } = await params;

@@ -35,12 +35,12 @@ export default function ProfileLayout({ userData, joinDate }: ProfileLayoutProps
                 <p className="text-white 300 mb-2">{userData?.bio}</p>
 
                 <div className="flex gap-6 text-sm">
-                  <div>
+                  {/* <div>
                     <span className="font-bold">{userData?.followers.length}</span> followers
                   </div>
                   <div>
                     <span className="font-bold">{userData?.following.length}</span> following
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

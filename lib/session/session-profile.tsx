@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import getSessionHandler from '@/lib/session/getSessionHandler'
+import { notFound } from 'next/navigation'
 
 export default function SessionProfile() {
   const [userId, setUserId] = useState<string | null>(null)
@@ -14,7 +15,7 @@ export default function SessionProfile() {
   }, [])
 
   useEffect(() => {
-    if (!userId) return
+    if (!userId) return 
     fetch(`/api/profile/${userId}`)
       .then(res => res.json())
       .then(data => {

@@ -1,4 +1,4 @@
-import Tmbd from "@/lib/tmbd/tmdb";
+import Tmbd from "@/lib/tmdb/tmdb";
 
 export async function fetchMoviesById(id: string) {
   const endpoints = [`/movie/${id}`, `/tv/${id}`];

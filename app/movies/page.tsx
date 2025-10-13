@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import GenreCarousel from "../../components/custom-ui/genreCarousel";
+import { fetchMoviesByGenre } from "@/lib/tmdb/fetchMoviesByGenre";
 
 const category = "movie";
 const genres = [
@@ -24,16 +24,21 @@ const genres = [
   { id: 37, name: 'Western' }
 ];
 
+ const genresData = await Promise.all(
+    genres.map((genre) => fetchMoviesByGenre(genre, category))
+  );
+
 export default function Movies() {
   return (
-    <div>
-      <div className="relative container mx-auto px-4 md:px-20 max-h-screen">
-        {genres.map((genre) => (
-          <Suspense key={genre.id}>
-            <GenreCarousel genre={genre} category={category} />
-          </Suspense>
-        ))}
-      </div>
-      </div>
+    <div className="relative container mx-auto px-4 md:px-20 max-h-screen">
+      {genresData.map(({ genre, movies }) => (
+        <GenreCarousel
+          key={genre.id}
+          genre={genre}
+          movies={movies}
+          category={category}
+        />
+      ))}
+    </div>
   );
 }

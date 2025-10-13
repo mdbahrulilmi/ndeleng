@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import TmbdSearch from '@/lib/tmbd/tmdb-search';
+import TmbdSearch from '@/lib/tmdb/tmdb-search';
 import { Link } from 'lucide-react';
 
 export default function Search() {
