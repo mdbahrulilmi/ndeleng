@@ -8,12 +8,8 @@ export default async function Tmbd(path: string) {
   const cached = tmdbCache.get(cacheKey);
 
   if (cached) {
-    const cacheTime = Date.now() - startCacheCheck;
-    console.log(`✅ Cache HIT: ${cacheKey} (checked in ${cacheTime} ms)`);
     return cached;
   } else {
-    const cacheTime = Date.now() - startCacheCheck;
-    console.log(`⚠️ Cache MISS: ${cacheKey} (checked in ${cacheTime} ms)`);
   }
 
   // 2. Fetch dari TMDB
@@ -37,15 +33,11 @@ export default async function Tmbd(path: string) {
 
     const data = await res.json();
     const fetchTime = Date.now() - startFetch;
-    console.log(`🌐 TMDB fetch took ${fetchTime} ms`);
 
-    // 3. Simpan ke cache
     tmdbCache.set(cacheKey, data);
-    console.log(`💾 Cache set for ${cacheKey}`);
 
     return data;
   } catch (err) {
-    console.error("Error fetching TMDB:", err);
     return { results: [] };
   }
 }

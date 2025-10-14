@@ -19,12 +19,24 @@ import { connectDB } from "../mongodb/connect"
        async jwt({ token, user }:{token:any,user:any}) {
         if (user) {
           token.id = user.id || user._id || null
+
+          await connectDB()
+          const profile = await Profile.findOne({ userId: token.id }).lean() as any
+
+          if (profile) {
+            token.profile = {
+            username: profile.username,
+            name: profile.name,
+            image: profile.image
+            }
+          }
         }
         return token;
       },
       async session({ session, token }:{session:any, token:any}) {
         if (session?.user) {
           session.user.id = token.id
+          session.user.profile = token.profile
         }
         return session
       },

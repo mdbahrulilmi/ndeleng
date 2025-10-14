@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "../components/layouts/navbar";
 import Design from "../components/layouts/design";
+import SessionWrapper from "@/lib/session/session-wrapper";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth/authOptions";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,23 +21,27 @@ export const metadata = {
   title: "ndeleng",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        
+        <SessionWrapper session={session}>
         <Navbar/>
-        <div className="relative h-screen overflow-y-auto scroll-hidden overflow-x-hidden bg-slate-950"> 
-        <Design/>
+        <div className="relative h-screen overflow-y-auto scroll-hidden overflow-x-hidden bg-[#040302]"> 
+        {/* <Design/> */}
         <div className="pt-15">
           {children}
         </div>
         </div>
+        </SessionWrapper>
       </body>
     </html>
   );

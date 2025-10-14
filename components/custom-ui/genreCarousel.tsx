@@ -28,7 +28,7 @@ export default function GenreCarousel({  genre,
           {movies.map((item: any) => (
             <CarouselItem
               key={item.id}
-              className="basis-1/1 md:basis-1/4 group backdrop-blur-sm bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 hover:border-purple-500/50 transition-all duration-300 mr-4"
+              className="basis-1/1 md:basis-1/4 group backdrop-blur-sm bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 hover:border-primary transition-all duration-300 mr-4"
             >
               <Link href={`detail/${item.id}`} className="block cursor-pointer">
               <div

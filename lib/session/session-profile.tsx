@@ -1,33 +1,30 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import useSWR from 'swr'
 import getSessionHandler from '@/lib/session/getSessionHandler'
-import { notFound } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 export default function SessionProfile() {
   const [userId, setUserId] = useState<string | null>(null)
-  const [userData, setUserData] = useState<any>(null)
-  const [joinDate, setJoinDate] = useState<string>('')
-  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     getSessionHandler().then(id => setUserId(id!))
   }, [])
 
-  useEffect(() => {
-    if (!userId) return 
-    fetch(`/api/profile/${userId}`)
-      .then(res => res.json())
-      .then(data => {
-        setUserData(data)
-        const date = new Date(data?.createdAt).toLocaleDateString('en-US', {
-          month: 'long',
-          year: 'numeric',
-        })
-        setJoinDate(date)
-      })
-      .finally(() => setLoading(false))
-  }, [userId])
+  const { data: userData, isLoading } = useSWR(
+    userId ? `/api/profile/${userId}` : null, // SWR skip kalau null
+    fetcher,
+    { revalidateOnFocus: false, dedupingInterval: 1000 * 60 * 10 } // cache 10 menit
+  )
 
-  return { userId, userData, joinDate, loading }
+  const joinDate = userData
+    ? new Date(userData.createdAt).toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric',
+      })
+    : ''
+
+  return { userData, joinDate, loading: isLoading }
 }

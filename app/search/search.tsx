@@ -48,7 +48,7 @@ export default function Search() {
             {data.map((item: any) => (
               <div
                 key={item.id}
-                className="group backdrop-blur-sm bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 hover:border-purple-500/50 transition-all duration-300"
+                className="group backdrop-blur-sm bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 hover:border-yellow-500/50 transition-all duration-300"
                 onClick={(e) => window.location.href=`/detail/${item.id}`}
               >
                 <div
