@@ -92,14 +92,13 @@ export default function ImageCropper({
 
   <div className="flex w-full justify-between">
     <Button
-      className="bg-purple-600 cursor-pointer"
+      className="bg-yellow-600 hover:bg-yellow-700 cursor-pointer"
       onClick={handleSave}
     >
       Save Cropped Image
     </Button>
     <Button
-      className="text-black"
-      variant="outline"
+      className="bg-gray-800 hover:bg-gray-900 px-6 py-3 rounded-lg font-semibold transition-colors cursor-pointer"
       onClick={onCancel}
     >
       Cancel

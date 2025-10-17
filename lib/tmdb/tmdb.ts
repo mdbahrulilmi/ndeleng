@@ -3,7 +3,6 @@ import { tmdbCache } from "./tmdb-cache";
 export default async function Tmbd(path: string) {
   const cacheKey = path;
 
-  // 1. Mulai cek cache
   const startCacheCheck = Date.now();
   const cached = tmdbCache.get(cacheKey);
 
@@ -12,7 +11,6 @@ export default async function Tmbd(path: string) {
   } else {
   }
 
-  // 2. Fetch dari TMDB
   const url = "https://api.themoviedb.org/3";
   const options = {
     method: "GET",

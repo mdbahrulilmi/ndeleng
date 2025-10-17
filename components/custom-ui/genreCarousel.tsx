@@ -17,7 +17,8 @@ export default function GenreCarousel({  genre,
       movies: any[];
       category: string;
     }) {
-  const title = category === "movie" ? "Movies" : "Tv Series";
+      const title = category === "movie" ? "Movies" : "Tv Series";
+      
   return (
     <div className="mt-5">
       <h2 className="text-2xl font-bold text-white mb-2 md:mb-6">
@@ -30,7 +31,7 @@ export default function GenreCarousel({  genre,
               key={item.id}
               className="basis-1/1 md:basis-1/4 group backdrop-blur-sm bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 hover:border-primary transition-all duration-300 mr-4"
             >
-              <Link href={`detail/${item.id}`} className="block cursor-pointer">
+              <Link href={`detail/${category}/${item.id}`} className="block cursor-pointer">
               <div
                 className="aspect-square rounded-md mb-3 group-hover:scale-105 transition-transform bg-cover bg-center"
                 style={{

@@ -1,8 +1,8 @@
 import { fetchMoviesById } from "@/lib/tmdb/fetchMoviesById";
 
-export default async function DetailPage({params}: {params: Promise<{ id: string }>}) {
-  const { id } = await params;
-  const data = await fetchMoviesById(id);
+export default async function DetailPage({params}: {params: Promise<{ category:string, id: string }>}) {
+  const { category, id } = await params;
+  const data = await fetchMoviesById(category, id);
 
   return (
     <div className="relative z-10 min-h-screen py-5 px-4 sm:px-6 lg:px-8">

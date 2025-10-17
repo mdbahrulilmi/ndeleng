@@ -83,11 +83,10 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
   
 
   return (
-    <div className="min-h-screen pt-10 md:pt-5 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white">
       <div className="relative z-10 max-w-3xl mx-auto px-4 py-8">
         <div className="mb-6">
           <h1 className="text-3xl font-bold mb-2">Edit Profile</h1>
-          <p className="text-purple-300 mb-3">Update your profile information</p> 
+          <p className="text-white mb-3">Update your profile information</p> 
   
           {/* Crop modal */}
           {imageFile && (
@@ -118,7 +117,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
                 className="w-24 h-24 rounded-full object-cover"
               />
             ) : (
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-4xl font-bold">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-yellow-500 to-pink-500 flex items-center justify-center text-4xl font-bold">
                 {formData.name ? formData.name.charAt(0).toUpperCase() : 'U'}
               </div>
             )}
@@ -131,7 +130,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
                   fileInput.click()
                 }
             }}
-            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 transition text-white rounded-sm cursor-pointer"
+            className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 transition text-white rounded-sm cursor-pointer"
           >
             Upload Image
           </button>
@@ -158,7 +157,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
                   htmlFor="name"
                   className="flex items-center gap-2 text-sm font-semibold mb-2"
                 >
-                  <User size={16} className="text-purple-400" />
+                  <User size={16} className="text-white" />
                   Full Name
                 </label>
                 <input
@@ -167,7 +166,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full h-11 bg-white/10 border border-white/20 rounded-lg px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full h-11 bg-white/10 border border-white/20 rounded-lg px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -177,7 +176,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
                   htmlFor="username"
                   className="flex items-center gap-2 text-sm font-semibold mb-2"
                 >
-                  <User size={16} className="text-purple-400" />
+                  <User size={16} className="text-white" />
                   Username
                 </label>
                 <input
@@ -186,7 +185,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
                   name="username"
                   value={formData.username}
                   onChange={handleChange}
-                  className="w-full h-11 bg-white/10 border border-white/20 rounded-lg px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full h-11 bg-white/10 border border-white/20 rounded-lg px-4 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   placeholder="Enter your username"
                 />
               </div>
@@ -196,7 +195,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
                   htmlFor="gender"
                   className="flex items-center gap-2 text-sm font-semibold mb-2"
                 >
-                  <Users size={16} className="text-purple-400" />
+                  <Users size={16} className="text-white" />
                   Gender
                 </label>
                 <select
@@ -204,7 +203,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                  className="w-full h-11 bg-white/10 border border-white/20 rounded-lg px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full h-11 bg-white/10 border border-white/20 rounded-lg px-4 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 >
                   <option value="male" className="bg-slate-900">
                     Male
@@ -229,10 +228,10 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
               value={formData.bio}
               onChange={handleChange}
               rows={4}
-              className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+              className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none"
               placeholder="Tell us about yourself..."
             />
-            <p className="text-xs text-purple-300 mt-2">
+            <p className="text-xs text-white mt-2">
               {formData.bio.length} / 500 characters
             </p>
           </div>
@@ -248,13 +247,12 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
             </button>
             <button
               type="submit"
-              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-semibold transition-colors cursor-pointer"
+              className="flex items-center gap-2 bg-yellow-600 hover:bg-yellow-700 px-6 py-3 rounded-lg font-semibold transition-colors cursor-pointer"
             >
               Save Changes
             </button>
           </div>
         </form>
       </div>
-    </div>
   )
 }

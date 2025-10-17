@@ -1,16 +1,14 @@
 import Tmbd from "@/lib/tmdb/tmdb";
 
-export async function fetchMoviesById(id: string) {
-  const endpoints = [`/movie/${id}`, `/tv/${id}`];
+export async function fetchMoviesById(category: string,id: string) {
+  let endpoints = `/${category}/${id}`;
 
-  const results = await Promise.allSettled(
-    endpoints.map((path) => Tmbd(path))
-  );
-
-  for (const res of results) {
-    if (res.status === "fulfilled" && res.value) {
-      return res.value;
-    }
+  try{
+    const results = await Tmbd(endpoints)
+  
+    return results;
   }
-  return null;
+  catch(err){
+
+  }
 }

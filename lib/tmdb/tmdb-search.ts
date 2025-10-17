@@ -5,9 +5,11 @@ export default async function TmbdSearch(path: string) {
     if (!res.ok) {
       throw new Error(`TMDB fetch failed: ${res.status}`);
     }
-
     const data = await res.json();
-    return data;
+
+    const match = path.match(/\/search\/([^?]+)/);
+    const category = match ? match[1] : 'unknown';
+    return { category, results: data.results ?? [] };
   } catch (err) {
     console.error("Error fetching TMDB:", err);
     return { results: [] };
