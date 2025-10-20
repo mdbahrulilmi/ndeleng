@@ -1,6 +1,13 @@
 import mongoose from "mongoose"
 const {Schema} = mongoose;
 
+const movieItemSchema = new Schema({
+  id: { type: String, required: true },
+  category: { type: String, required: true },
+  title: { type: String, required: true },
+  image: { type: String }
+}, { _id: false });
+
 const profileSchema = new Schema({
     userId: { type: String, required: true },
     name: { type: String, required: true},
@@ -12,7 +19,8 @@ const profileSchema = new Schema({
     location: { type: String },
     favoriteGenres: [{ type: String }],
     favoriteMovies: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
-    watchlist: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
+    watchedlist: { type:[ movieItemSchema ], default:[] },
+    withlist: { type:[ movieItemSchema ], default:[] },
     followers: [{ type: Schema.Types.ObjectId, ref: "Profile" }],
     following: [{ type: Schema.Types.ObjectId, ref: "Profile" }],
     points: { type: Number, default: 0 },
@@ -20,7 +28,7 @@ const profileSchema = new Schema({
     socialLinks: {
         instagram: String,
         twitter: String,
-        letterboxd: String, // platform film populer
+        letterboxd: String,
     },
 },{
     timestamps:true,

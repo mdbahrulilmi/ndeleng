@@ -14,9 +14,9 @@ export default function SessionProfile() {
   }, [])
 
   const { data: userData, isLoading } = useSWR(
-    userId ? `/api/profile/${userId}` : null, // SWR skip kalau null
+    userId ? `/api/profile/${userId}` : null,
     fetcher,
-    { revalidateOnFocus: false, dedupingInterval: 1000 * 60 * 10 } // cache 10 menit
+    { revalidateOnFocus: false, dedupingInterval: 1000 * 60 * 10 }
   )
 
   const joinDate = userData

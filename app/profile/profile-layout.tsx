@@ -21,7 +21,7 @@ export default function ProfileLayout({ userData, joinDate }: ProfileLayoutProps
             <div className="flex flex-col md:flex-row gap-6 items-start">
               {/* Avatar */}
               <div className="relative -mt-20">
-                {userData?.image != null ?
+                {userData?.image != null || userData?.image != "" ?
                 <img src={userData?.image} className="w-40 h-40 rounded-full bg-gradient-to-br from-yellow-400 to-amber-400 flex items-center justify-center text-6xl font-bold border-4 border-slate-950"/> : 
                 <div className="w-40 h-40 rounded-full bg-gradient-to-br from-yellow-400 to-amber-400 flex items-center justify-center text-6xl font-bold border-4 border-slate-950">
                   {userData?.name.charAt(0).toUpperCase()}

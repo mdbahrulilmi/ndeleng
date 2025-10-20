@@ -23,7 +23,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
     if (userData) {
       setFormData({
         userId: userData.userId || '',
-        image: userData.image || '',
+        image: userData.image || null,
         name: userData.name || '',
         username: userData.username || '',
         gender: userData.gender || 'male',

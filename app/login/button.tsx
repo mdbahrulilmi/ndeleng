@@ -4,9 +4,8 @@ import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function LoginButton() {
   const { data: session } = useSession()
-
   if (session) {
-    const name = session?.user.profile.name
+    const name = session?.user.profile?.name ?? session?.user.name;
     const firstName = name?.split(" ")[0]
     return (
       // 

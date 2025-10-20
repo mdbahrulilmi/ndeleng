@@ -12,6 +12,7 @@ const navigations = [
   ["/", "Home"],
   ["/movies", "Movies"],
   ["/tv", "TV"],
+  ["/foryou", "For you"],
 ]
 
 export function Navbar() {

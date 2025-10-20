@@ -25,7 +25,6 @@ export default async function Tmbd(path: string) {
     const res = await fetch(`${url}${path}`, options);
 
     if (!res.ok) {
-      console.error("TMDB fetch failed:", res.status, res.statusText);
       return { results: [] };
     }
 

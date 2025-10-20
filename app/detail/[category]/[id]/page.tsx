@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { fetchMoviesById } from "@/lib/tmdb/fetchMoviesById";
+import WithlistButton from "./withlist";
+import WatchedButton from "./watched";
 
 export default async function DetailPage({params}: {params: Promise<{ category:string, id: string }>}) {
   const { category, id } = await params;
@@ -36,10 +39,27 @@ export default async function DetailPage({params}: {params: Promise<{ category:s
                 </h1>
                 
                 {data.tagline && (
-                  <p className="text-lg sm:text-xl text-purple-300 italic mb-6">
+                  <p className="text-lg sm:text-xl text-purple-300 italic">
                     "{data.tagline}"
                   </p>
                 )}
+
+                <div className="mt-2 flex gap-2 mb-6">
+                
+                <WithlistButton
+                    id={data.id}
+                    title={data.title || data.name}
+                    image={data.poster_path}
+                    category={category}
+                />
+
+                <WatchedButton
+                    id={data.id}
+                    title={data.title || data.name}
+                    image={data.poster_path}
+                    category={category}
+                />
+                </div>
 
                 {/* Rating & Status */}
                 <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -72,6 +92,7 @@ export default async function DetailPage({params}: {params: Promise<{ category:s
                     ))}
                   </div>
                 )}
+                
               </div>
             </div>
           </div>
