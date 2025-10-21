@@ -57,7 +57,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
         formData.image,
         `avatar-${formData.userId}-${Date.now()}.png`
       );
-      imageUrl = await SupabaseBucket(file);
+      imageUrl = await SupabaseBucket(file) as string;
     }
 
     const updatedData = {
