@@ -1,44 +1,31 @@
-'use client'
+'use client';
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import TmbdSearch from '@/lib/tmdb/tmdb-search';
-
-export default function Search() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get('q');
+export default function Recommendation() {
+  const { data: session } = useSession();
+  const userId = session?.user.id;
   const [data, setData] = useState<any[]>([]);
-
   useEffect(() => {
-    const fetchData = async () => {
-      if (!query) return;
+    if (!userId) return;
 
+    async function fetchRecommendations() {
       try {
-        const [resultMovie, resultTv] = await Promise.all([
-          TmbdSearch(`/search/movie?query=${encodeURIComponent(query)}`),
-          TmbdSearch(`/search/tv?query=${encodeURIComponent(query)}`)
-        ]);
-
-        const combinedResults = [
-          ...resultMovie.results.map((item: any) => ({ ...item, category: resultMovie.category })),
-          ...resultTv.results.map((item: any) => ({ ...item, category: resultTv.category }))
-        ];
-
-        setData(combinedResults);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+        const res = await fetch(`/api/recommendations/${userId}`);
+        if (!res.ok) throw new Error("Failed to fetch recommendations");
+        
+        const result = await res.json();
+        setData(result);
+      } catch (err) {
       }
-    };
+    }
 
-    fetchData();
-  }, [query]);
+    fetchRecommendations();
+  }, [userId]);
 
   return (
     <div className="relative container mx-auto py-5 px-4 md:px-20 pb-20 h-screen">
-      <h2 className="text-3xl font-bold text-white mb-6">
-        {query ? `List of "${query}"` : 'Search for movies or TV shows'}
-      </h2>
-
+      <h2 className="text-3xl font-bold text-white mb-6">For You</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {data.map((item: any) => (
           <div

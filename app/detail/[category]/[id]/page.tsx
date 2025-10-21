@@ -1,11 +1,14 @@
-import { fetchMoviesById } from "@/lib/tmbd/fetchMoviesById";
+import { Button } from "@/components/ui/button";
+import { fetchMoviesById } from "@/lib/tmdb/fetchMoviesById";
+import WithlistButton from "./withlist";
+import WatchedButton from "./watched";
 
-export default async function DetailPage({params}: {params: Promise<{ id: string }>}) {
-  const { id } = await params;
-  const data = await fetchMoviesById(id);
+export default async function DetailPage({params}: {params: Promise<{ category:string, id: string }>}) {
+  const { category, id } = await params;
+  const data = await fetchMoviesById(category, id);
 
   return (
-    <div className="relative z-10 min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+    <div className="relative z-10 min-h-screen py-5 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Backdrop Header */}
         <div className="relative rounded-3xl overflow-hidden mb-8 shadow-2xl">
@@ -36,10 +39,27 @@ export default async function DetailPage({params}: {params: Promise<{ id: string
                 </h1>
                 
                 {data.tagline && (
-                  <p className="text-lg sm:text-xl text-purple-300 italic mb-6">
+                  <p className="text-lg sm:text-xl text-purple-300 italic">
                     "{data.tagline}"
                   </p>
                 )}
+
+                <div className="mt-2 flex gap-2 mb-6">
+                
+                <WithlistButton
+                    id={data.id}
+                    title={data.title || data.name}
+                    image={data.poster_path}
+                    category={category}
+                />
+
+                <WatchedButton
+                    id={data.id}
+                    title={data.title || data.name}
+                    image={data.poster_path}
+                    category={category}
+                />
+                </div>
 
                 {/* Rating & Status */}
                 <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -72,6 +92,7 @@ export default async function DetailPage({params}: {params: Promise<{ id: string
                     ))}
                   </div>
                 )}
+                
               </div>
             </div>
           </div>
