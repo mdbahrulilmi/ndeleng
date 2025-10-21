@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button'
 import CropImage from '@/components/ui/imageCropper'
+import { base64ToFile } from '@/lib/base64tofile'
+import { SupabaseBucket } from '@/lib/supabase/supabase-bucket'
 import Tmpfiles from '@/lib/Tmpfiles'
 import { User, Save, X, Users } from 'lucide-react'
 import { useState, useEffect } from 'react'
@@ -47,14 +49,15 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
   e.preventDefault()
 
   try {
-    let imageUrl = formData.image
+    let imageUrl = formData.image;
 
-    if (formData.image && formData.image.startsWith('data:')) {
-      imageUrl = await Tmpfiles(formData.image)
-      imageUrl = imageUrl.replace(
-        "tmpfiles.org/",
-        "tmpfiles.org/dl/"
-      )
+    // jika image hasil crop (base64)
+    if (formData.image && formData.image.startsWith("data:")) {
+      const file = base64ToFile(
+        formData.image,
+        `avatar-${formData.userId}-${Date.now()}.png`
+      );
+      imageUrl = await SupabaseBucket(file);
     }
 
     const updatedData = {

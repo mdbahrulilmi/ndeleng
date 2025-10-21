@@ -15,7 +15,6 @@ export async function GET(req: Request, context: any) {
     );
   }
 
-  // Ambil 5 watchedlist terakhir
   const top5Latest = profile.watchedlist.slice(-5).reverse();
 
   try {
@@ -27,7 +26,7 @@ export async function GET(req: Request, context: any) {
         const endpoint = `/${category}/${movieId}/recommendations`;
         const data = await Tmbd(endpoint);
 
-        return (data.results ?? []).slice(0, 10).map((rec: any) => ({
+        return (data.results ?? []).slice(0, 6).map((rec: any) => ({
           ...rec,
           category,
         }));

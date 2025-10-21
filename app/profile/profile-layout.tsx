@@ -2,13 +2,15 @@
 
 import { Film, Heart, Award, Users, Calendar } from 'lucide-react'
 import { signOut } from 'next-auth/react'
-
+import MovieCard from './movie_card'
 interface ProfileLayoutProps {
   userData: any
   joinDate: string
 }
 
 export default function ProfileLayout({ userData, joinDate }: ProfileLayoutProps) {
+
+  console.log(userData);
   return (
       <div className="relative z-10 max-w-4xl mx-auto px-4 py-8">
         {/* Cover + Profile Picture */}
@@ -21,7 +23,7 @@ export default function ProfileLayout({ userData, joinDate }: ProfileLayoutProps
             <div className="flex flex-col md:flex-row gap-6 items-start">
               {/* Avatar */}
               <div className="relative -mt-20">
-                {userData?.image != null || userData?.image != "" ?
+                {userData?.image != null && userData?.image != "" ?
                 <img src={userData?.image} className="w-40 h-40 rounded-full bg-gradient-to-br from-yellow-400 to-amber-400 flex items-center justify-center text-6xl font-bold border-4 border-slate-950"/> : 
                 <div className="w-40 h-40 rounded-full bg-gradient-to-br from-yellow-400 to-amber-400 flex items-center justify-center text-6xl font-bold border-4 border-slate-950">
                   {userData?.name.charAt(0).toUpperCase()}
@@ -96,7 +98,14 @@ export default function ProfileLayout({ userData, joinDate }: ProfileLayoutProps
                 <h2 className="font-bold text-lg">Watchlist</h2>
                 <Film size={20} className="text-white" />
               </div>
+              {userData?.watchedlist ? 
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {userData?.watchedlist.map((list:any)=>(
+                <MovieCard key={`${list.category}-${list.id}`} item={list}/>
+              ))}
+              </div> :
               <p className="text-sm text-white">No movies in watchlist</p>
+              }
             </div>
 
             <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">

@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi"
 import Search from "./search"
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider, useSession } from "next-auth/react"
 import LoginButton from "@/app/login/button"
 import { usePathname } from "next/navigation"
 
@@ -18,6 +18,7 @@ const navigations = [
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false)
   const pathname = usePathname()
+  const { data: session } = useSession();
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
@@ -36,23 +37,25 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navigations.map(([href, label]) => {
-              const isActive = pathname === href
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`relative px-2 py-1 text-gray-300 font-semibold transition-all duration-300 
-                    ${isActive ? "text-primary" : "hover:text-primary"}
-                    after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
-                    after:w-full after:scale-x-0 after:bg-primary after:origin-right after:transition-transform 
-                    hover:after:origin-left hover:after:scale-x-100
-                    ${isActive ? "after:scale-x-100 after:origin-left" : ""}`}
-                >
-                  {label}
-                </Link>
-              )
-            })}
+           {navigations.map(([href, label]) => {
+            if (label === "For you" && !session) return null;
+
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`relative px-2 py-1 text-gray-300 font-semibold transition-all duration-300 
+                  ${isActive ? "text-primary" : "hover:text-primary"}
+                  after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
+                  after:w-full after:scale-x-0 after:bg-primary after:origin-right after:transition-transform 
+                  hover:after:origin-left hover:after:scale-x-100
+                  ${isActive ? "after:scale-x-100 after:origin-left" : ""}`}
+              >
+                {label}
+              </Link>
+            );
+          })}
               <LoginButton />
           </div>
 

@@ -6,8 +6,6 @@ export default function Recommendation() {
   const { data: session } = useSession();
   const userId = session?.user.id;
   const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     if (!userId) return;
 
@@ -17,24 +15,17 @@ export default function Recommendation() {
         if (!res.ok) throw new Error("Failed to fetch recommendations");
         
         const result = await res.json();
-        console.log(result);
         setData(result);
       } catch (err) {
-        console.error("Error fetching recommendations:", err);
-      } finally {
-        setLoading(false);
       }
     }
 
     fetchRecommendations();
   }, [userId]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!data.length) return <div>No recommendations found</div>;
-
   return (
     <div className="relative container mx-auto py-5 px-4 md:px-20 pb-20 h-screen">
-      <h2 className="text-3xl font-bold text-white mb-6">Recommendations</h2>
+      <h2 className="text-3xl font-bold text-white mb-6">For You</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {data.map((item: any) => (
           <div
