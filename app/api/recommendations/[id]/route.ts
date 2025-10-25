@@ -7,7 +7,7 @@ export async function GET(req: Request, context: any) {
 
   await connectDB();
 
-  const profile = await Profile.findOne({ userId : param.id });
+  const profile = await Profile.findOne({ _id: param.id });
   if (!profile || !profile.watchedlist || profile.watchedlist.length === 0) {
     return new Response(
       JSON.stringify({ message: "No watched list found" }),

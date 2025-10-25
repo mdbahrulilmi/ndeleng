@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/mongodb/connect"
-import { Profile } from "@/models/Profile"
+import { Post } from "@/models/Post"
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
@@ -7,10 +7,8 @@ export async function POST(req: Request) {
     const data = await req.json()
     await connectDB()
 
-    const update = await Profile.updateOne(
-      { _id: data.userId },
-      { $set: { name: data.name, username: data.username, gender: data.gender, bio: data.bio, image:data.image } },
-      { upsert: true }
+    const update = await Post.insertOne(
+      { userId: data.userId, movieId:data.movieId, text:data.text,  }
     )
 
     return NextResponse.json({ success: true, update })
@@ -19,3 +17,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 })
   }
 }
+

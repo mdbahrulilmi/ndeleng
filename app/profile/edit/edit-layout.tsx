@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import CropImage from '@/components/ui/imageCropper'
 import { base64ToFile } from '@/lib/base64tofile'
 import { SupabaseBucket } from '@/lib/supabase/supabase-bucket'
-import Tmpfiles from '@/lib/Tmpfiles'
 import { User, Save, X, Users } from 'lucide-react'
 import { useState, useEffect } from 'react'
 

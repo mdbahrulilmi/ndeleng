@@ -9,8 +9,6 @@ interface ProfileLayoutProps {
 }
 
 export default function ProfileLayout({ userData, joinDate }: ProfileLayoutProps) {
-
-  console.log(userData);
   return (
       <div className="relative z-10 max-w-4xl mx-auto px-4 py-8">
         {/* Cover + Profile Picture */}

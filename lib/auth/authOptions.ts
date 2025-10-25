@@ -51,7 +51,7 @@ import { connectDB } from "../mongodb/connect"
         if (!existing) {
             const username = await usernameGenerator(user.name);
             await Profile.create({ 
-              userId: user.id,
+              _id: user.id,
               name:user.name,
               username: username
             })

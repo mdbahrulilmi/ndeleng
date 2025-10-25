@@ -15,17 +15,17 @@ try {
       image: data.image || null
     };
     const checkWithlist = await Profile.findOne({
-      userId: data.userId,
+      _id: data.userId,
       "withlist.id": newItem.id
     })
     if(checkWithlist){
       await Profile.updateOne(
-        { userId: data.userId },
+        { _id: data.userId },
         { $pull: { withlist: { id: newItem.id } } }
       );
     }
     const update = await Profile.updateOne(
-      { userId: data.userId },
+      { _id: data.userId },
       { $addToSet: { watchedlist: newItem } }
     );
     return NextResponse.json({ success: true, update });

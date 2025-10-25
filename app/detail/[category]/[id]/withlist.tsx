@@ -8,7 +8,7 @@ export default function WithlistButton({ id, title, image, category }: { id: str
   const userId = session?.user.id;
 
   async function handleWithlist() {
-    if (!userId) return; // pastikan user login
+    if (!userId) return;
 
     try {
       const res = await fetch('/api/withlist', {

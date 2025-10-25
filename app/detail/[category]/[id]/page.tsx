@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { fetchMoviesById } from "@/lib/tmdb/fetchMoviesById";
 import WithlistButton from "./withlist";
 import WatchedButton from "./watched";
+import { useEffect } from "react";
+import PostList from "./postlist";
 
 export default async function DetailPage({params}: {params: Promise<{ category:string, id: string }>}) {
   const { category, id } = await params;
@@ -161,6 +163,8 @@ export default async function DetailPage({params}: {params: Promise<{ category:s
                 </div>
               </div>
             )}
+
+            <PostList movieId={id}/>
           </div>
 
           {/* Sidebar */}

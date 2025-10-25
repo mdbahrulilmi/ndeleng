@@ -16,12 +16,12 @@ try {
     };
 
     const checkWatchedlist = await Profile.findOne({
-          userId: data.userId,
+          _id: data.userId,
           "watchedlist.id": newItem.id
         })
     if(!checkWatchedlist){
       const update = await Profile.updateOne(
-        { userId: data.userId },
+        { _id: data.userId },
         { $addToSet: { withlist: newItem } }
       );
       return NextResponse.json({ success: true, update });
