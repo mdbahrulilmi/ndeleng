@@ -8,9 +8,8 @@ export async function POST(req: Request) {
     await connectDB()
 
     const update = await Profile.updateOne(
-      { _id: data.userId },
-      { $set: { name: data.name, username: data.username, gender: data.gender, bio: data.bio, image:data.image } },
-      { upsert: true }
+      { _id: data._id },
+      { $set: { name: data.name, username: data.username, gender: data.gender, bio: data.bio, image:data.image } }
     )
 
     return NextResponse.json({ success: true, update })
