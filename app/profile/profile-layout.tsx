@@ -3,6 +3,7 @@
 import { Film, Heart, Award, Users, Calendar } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import MovieCard from './movie_card'
+import PostCard from './post-card'
 interface ProfileLayoutProps {
   userData: any
   joinDate: string
@@ -10,7 +11,7 @@ interface ProfileLayoutProps {
 
 export default function ProfileLayout({ userData, joinDate }: ProfileLayoutProps) {
   return (
-      <div className="relative z-10 max-w-4xl mx-auto px-4 py-8">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 py-8">
         {/* Cover + Profile Picture */}
         <div className="bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 mb-4">
           {/* Cover Photo */}
@@ -83,38 +84,74 @@ export default function ProfileLayout({ userData, joinDate }: ProfileLayoutProps
               </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 mb-4">
               <h2 className="font-bold text-lg mb-4">Badges</h2>
               <p className="text-sm text-white">No badges earned yet</p>
             </div>
-          </div>
-
-          {/* Right Column - Posts/Activity */}
-          <div className="md:col-span-2 space-y-4">
             <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-bold text-lg">Watchlist</h2>
-                <Film size={20} className="text-white" />
+                <h2 className="font-bold text-lg">Withlist</h2>
+                <Heart size={20} className="text-pink-400" />
               </div>
-              {userData?.watchedlist ? 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {userData?.watchedlist.map((list:any)=>(
+              {userData?.withlist ? 
+              <div className="grid grid-cols-2 gap-2">
+              {userData?.withlist.map((list:any)=>(
                 <MovieCard key={`${list.category}-${list.id}`} item={list}/>
               ))}
               </div> :
-              <p className="text-sm text-white">No movies in watchlist</p>
+              <p className="text-sm text-white">No movies in withlist</p>
               }
-            </div>
-
+            </div> 
+          </div>
+          
+          {/* Right Column - Posts/Activity */}
+          <div className="md:col-span-2 space-y-4">
+            
             <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-bold text-lg">Favorite Movies</h2>
-                <Heart size={20} className="text-pink-400" />
+                <h2 className="font-bold text-lg">Recently</h2>
+                <Film size={20} className="text-white" />
               </div>
-              <p className="text-sm text-white">No favorite movies yet</p>
+            </div>
+            {userData?.watchedlist && userData?.posts ? (
+              <div className="flex flex-col gap-4">
+                {userData.watchedlist
+                  .flatMap((movie: any) => {
+                    const relatedPosts = userData.posts.filter(
+                      (post: any) => post.movieId == movie.id
+                    );
+
+                    if (relatedPosts.length === 0) {
+                      return [{
+                        ...movie,
+                        postText: null,
+                        postId: null,
+                        timestamp: null,
+                      }];
+                    }
+
+                    return relatedPosts.map((post: any) => ({
+                      ...movie,
+                      postText: post.text,
+                      postId: post._id,
+                      timestamp: new Date(post.timestamp),
+                    }));
+                  })
+                  .filter((item: any) => item.timestamp !== null)
+                  .sort((a: any, b: any) => b.timestamp - a.timestamp)
+                  .map((itemGroup: any) => (
+                    <PostCard
+                      key={`${itemGroup.postId}`}
+                      item={itemGroup}
+                    />
+                  ))}
+              </div>
+            ) : (
+              <p className="text-sm text-white">Loading...</p>
+            )}
+
             </div>
           </div>
-        </div>
       </div>
   )
 }

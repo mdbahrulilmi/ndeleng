@@ -47,7 +47,6 @@ export async function GET(req: Request, context: any) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    console.error("Error fetching recommendations:", err);
     return new Response(
       JSON.stringify({ error: "Internal server error" }),
       { status: 500, headers: { "Content-Type": "application/json" } }

@@ -33,7 +33,6 @@ export async function GET(request: NextRequest) {
     const data = await res.json();
     return NextResponse.json(data);
   } catch (err) {
-    console.error("Error fetching TMDB:", err);
     return NextResponse.json({ results: [] }, { status: 500 });
   }
 }

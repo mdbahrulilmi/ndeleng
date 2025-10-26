@@ -26,7 +26,10 @@ export default function PostList({movieId}:{movieId:String}) {
       ) : (
         posts.map((post: any) => (
           <div key={post._id} className="flex flex-col mb-2 gap-2 p-4 bg-white/5 rounded-lg border border-purple-500/10">
-            <label className="text-xs">{post.userId.username}</label>
+            <div className="flex justify-between items-center">
+            <p className="text-sm">{post.userId.username}</p>
+            <p className="text-xs">{new Date(post.timestamp).toLocaleDateString('en-GB')}</p>
+            </div>
             <p className="text-lg">{post.text}</p>
           </div>
         ))
