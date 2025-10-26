@@ -2,13 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
+import { NextResponse } from "next/server";
+import { toast } from "sonner"
 
 export default function WithlistButton({ id, title, image, category }: { id: string, title: string, image: string, category: string }) {
   const { data: session } = useSession();
   const userId = session?.user.id;
 
   async function handleWithlist() {
-    if (!userId) return; // pastikan user login
+    if (!userId) return;
 
     try {
       const res = await fetch('/api/withlist', {
@@ -23,9 +25,14 @@ export default function WithlistButton({ id, title, image, category }: { id: str
         })
       });
 
-      const result = await res.json();
+      if (res.ok) {
+      await res.json();
+      toast.success("Withlist has been added")
+      }
+
     } catch (err) {
-      console.error("Fetch error:", err);
+      const error = err as Error;
+          return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
   }
 
@@ -35,7 +42,7 @@ export default function WithlistButton({ id, title, image, category }: { id: str
       <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleWithlist}>
         Withlist
       </Button>
-    ): null}
+    ): null}   
     </>
   );  
 }

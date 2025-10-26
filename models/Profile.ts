@@ -9,7 +9,6 @@ const movieItemSchema = new Schema({
 }, { _id: false });
 
 const profileSchema = new Schema({
-    userId: { type: String, required: true },
     name: { type: String, required: true},
     username: { type: String, required: true, unique: true},
     bio:{type: String},

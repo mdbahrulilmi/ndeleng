@@ -7,7 +7,7 @@ export async function GET(req: Request, context: any) {
 
   await connectDB();
 
-  const profile = await Profile.findOne({ userId : param.id });
+  const profile = await Profile.findOne({ _id: param.id });
   if (!profile || !profile.watchedlist || profile.watchedlist.length === 0) {
     return new Response(
       JSON.stringify({ message: "No watched list found" }),
@@ -47,7 +47,6 @@ export async function GET(req: Request, context: any) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    console.error("Error fetching recommendations:", err);
     return new Response(
       JSON.stringify({ error: "Internal server error" }),
       { status: 500, headers: { "Content-Type": "application/json" } }
