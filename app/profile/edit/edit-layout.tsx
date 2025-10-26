@@ -11,9 +11,10 @@ interface EditProfileLayoutProps {
 
 export default function EditProfileLayout({ userData }: EditProfileLayoutProps) {
   const [imageFile, setImageFile] = useState<File | null>(null)
+  const [previousImage, setPreviousimage] = useState('')
   const [formData, setFormData] = useState({
     image: '',
-    userId: '',
+    _id: '',
     name: '',
     username: '',
     gender: 'male',
@@ -23,13 +24,14 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
   useEffect(() => {
     if (userData) {
       setFormData({
-        userId: userData.userId || '',
+        _id: userData._id || '',
         image: userData.image || null,
         name: userData.name || '',
         username: userData.username || '',
         gender: userData.gender || 'male',
         bio: userData.bio || '',
       })
+      setPreviousimage(userData.image || null)
     }
   }, [userData])
 
@@ -49,14 +51,22 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
 
   try {
     let imageUrl = formData.image;
+    let oldFilePath: string | undefined = undefined;
 
-    // jika image hasil crop (base64)
+    if (previousImage != null){
+       oldFilePath = previousImage.split("/storage/v1/object/public/avatars/")[1];;
+    }
+
+
     if (formData.image && formData.image.startsWith("data:")) {
       const file = base64ToFile(
         formData.image,
-        `avatar-${formData.userId}-${Date.now()}.png`
+        `avatar-${formData._id}-${Date.now()}.png`
       );
-      imageUrl = await SupabaseBucket(file) as string;
+      const hasilUpload = await SupabaseBucket(file, oldFilePath);
+      if (hasilUpload) {
+          imageUrl = hasilUpload.publicUrl;
+        }
     }
 
     const updatedData = {
@@ -76,7 +86,7 @@ export default function EditProfileLayout({ userData }: EditProfileLayoutProps) 
       window.location.href = '/profile'
     }
   } catch (err) {
-    console.error("Upload failed:", err)
+    return
   }
 }
   const handleCancel = () => {
